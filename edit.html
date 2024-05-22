@@ -1,0 +1,67 @@
+<!-- User Profile Edit Feature-->
+
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Profile Edit Page</title>
+    <style>
+        .container {
+
+            margin: 20px;
+        }
+        .btn {
+            cursor: pointer;
+            margin-top: 10px;
+            padding: 10px 20px;
+            color: white;
+            border: none;
+            text-align: center;
+            display: inline-block;
+        }
+        .btn.save {
+            background-color: #4CAF50;
+        }
+        .btn.cancel {
+            background-color: #f44336;
+        }
+        .container{
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            margin: auto auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <div>
+        <textarea id="profile-edit" rows="15" cols="50"></textarea>
+        <br>
+        <button class="btn save" id="save-btn">Save</button>
+        <button class="btn cancel" id="cancel-btn">Cancel</button>
+    </div>
+    </div>
+
+    <script>
+        document.addEventListener('DOMContentLoaded', function() {
+            const profileText = localStorage.getItem('profileText');
+            if (profileText) {
+                document.getElementById('profile-edit').value = profileText;
+            }
+
+            document.getElementById('save-btn').addEventListener('click', function() {
+                const updatedText = document.getElementById('profile-edit').value;
+                localStorage.setItem('profileText', updatedText);
+                localStorage.setItem('update', 'true');
+                window.location.href = 'index.html';
+            });
+
+            document.getElementById('cancel-btn').addEventListener('click', function() {
+                window.location.href = 'index.html';
+            });
+        });
+    </script>
+</body>
+</html>
