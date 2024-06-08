@@ -1,27 +1,32 @@
+document.addEventListener('DOMContentLoaded', () => {
+    const fontSizeButtons = document.querySelectorAll('#fontSize button');
+    const colorButtons = document.querySelectorAll('#color button');
+    const backgroundButtons = document.querySelectorAll('#background button');
 
-// Sharing Post to different social media platform
+    fontSizeButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            document.body.style.fontSize = button.dataset.size === 'small' ? '12px' :
+                                           button.dataset.size === 'medium' ? '16px' : '20px';
+            fontSizeButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+        });
+    });
 
-document.addEventListener('DOMContentLoaded', function () {
-    const shareButtons = document.querySelectorAll('.share-button');
-    
-    const shareContent = () => {
-        const url = encodeURIComponent(window.location.href);
-        const text = encodeURIComponent(document.title);
+    colorButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            document.body.style.color = button.dataset.color;
+            colorButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+        });
+    });
 
-        const shareUrls = {
-            // facebook: `https://www.facebook.com/sharer/sharer.php?u=${url}`,
-            twitter: `https://twitter.com/intent/tweet?url=${url}&text=${text}`,
-            linkedin: `https://www.linkedin.com/shareArticle?mini=true&url=${url}&title=${text}`,
-            reddit: `https://www.reddit.com/submit?url=${url}&title=${text}`,
-            whatsapp: `https://api.whatsapp.com/send?text=${text} ${url}`
-        };
-
-        for (const platform in shareUrls) {
-            window.open(shareUrls[platform], '_blank');
-        }
-    };
-
-    shareButtons.forEach(button => {
-        button.addEventListener('click', shareContent);
+    backgroundButtons.forEach(button => {
+        button.addEventListener('click', () => {
+            document.body.style.backgroundColor = button.dataset.bg === 'light' ? '#ffffff' :
+                                                  button.dataset.bg === 'dim' ? '#555555' : '#000000';
+            document.body.style.color = button.dataset.bg === 'light' ? '#000000' : '#ffffff';
+            backgroundButtons.forEach(btn => btn.classList.remove('active'));
+            button.classList.add('active');
+        });
     });
 });
